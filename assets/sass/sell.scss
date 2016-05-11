@@ -1,0 +1,87 @@
+@import "base";
+@import "login";
+@import "header";
+
+body {
+	background-color: #f9f9f7;
+}
+
+.centered-block {
+   @include flexbox;
+	@include flex-direction(row);
+	@include justify-content(center);
+	@include align-items(center);
+}
+
+.seller-section {
+	margin-top: 5%;
+	margin-bottom: 5%;	
+
+
+	.seller-forms {
+		object-position: center; 
+		padding: 30px 20px 0 20px;
+		@include box-shadow(2px, 4px, 4px, -2px, rgba(0,0,0,0.75));
+		border: 1px solid #dce0e0;
+		background-color: #fff;
+		width: 50%;
+
+		p{
+			margin: 0;
+			font-size: 20px; 
+			font-weight: bold;  
+		}
+
+		.text-box{
+
+			label{
+				&:before{
+					content: "\a";
+					white-space: pre; 
+				}
+			}
+
+
+
+			.buyItNow-Section{
+				input.number[type=number] {
+			 		&::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+			    	-webkit-appearance: none;
+			   		-moz-appearance: none;
+			   		appearance: none;
+			    	margin: 0;
+			  		}
+				}
+			}
+
+			.auction-Section{
+				input.number[type=number] {
+			 		&::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+			    	-webkit-appearance: none;
+			   		-moz-appearance: none;
+			   		appearance: none;
+			    	margin: 0;
+			  		}
+				}
+			}			
+
+			button.submit {
+			  float: right; 
+			  background-color: #FFD700; //gold
+			  border: none;
+			  color: white;
+			  padding: 15px 32px;
+			  text-align: center;
+			  text-decoration: none;
+			  // display: inline-block;
+			  display: block; 
+			  font-size: 16px;
+			  margin: 4px 2px;
+			}
+		}
+	}
+}
+
+.switch.sell_checkbox {
+	margin: 0 0 15px 0;
+}

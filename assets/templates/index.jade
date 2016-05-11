@@ -1,0 +1,76 @@
+{% load staticfiles %}
+html
+	head
+		meta(charset='utf-8')
+		title DataBeezzz
+		<link rel="icon" type="image/png" href="{% static "images/bee.png" %}">
+		<script type="text/javascript" src="{% static "js/index.bundle.js" %}"></script>
+		<link rel="stylesheet" href="{% static "css/index.css" %}"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	body
+		include _blocks/header
+		include _blocks/login
+		section.main
+			.row.max-width
+				.large-12.columns(style="padding:0; !important")
+					.content
+						ul.bxslider
+							li
+								<img src="{% static "images/main/main5.jpg" %}">
+							li
+								<img src="{% static "images/main/main2.jpg" %}", style="height: 100%;">
+							li
+								<img src="{% static "images/main/main4.jpg" %}", style="height: 100%;">
+						.front
+						.rotate
+							span The time to  
+								span#js-rotating change styles, refresh gardens, record advantures
+						h1.subText Summer! Design your own world
+						form.search(method="GET", action="/search/")
+							.inputBox
+								input#autocomplete(type="text", name="q", placeholder="Find your ways to change")
+								input.button.postfix.submit(type="submit", value="Search")
+
+			hr#line
+		section.first
+			.title Discover New Limits
+			.content
+				.row
+					.large-12.small-12.columns
+						<img class="image-main" src="{% static "images/second/picture1.png" %}">
+				.row
+					.large-6.small-12.columns
+						<img class="image-sub" src="{% static "images/second/picture2.png" %}">
+					.large-6.small-12.columns
+						<img class="image-sub" src="{% static "images/second/picture3.png" %}">
+				.row
+					.large-6.small-12.columns
+						<img class="image-sub" src="{% static "images/second/picture4.png" %}">
+					.large-6.small-12.columns
+						<img class="image-sub" src="{% static "images/second/picture5.png" %}">
+		section.second
+			.content
+				.title About Us
+				.row
+					.large-centered.columns
+						.aboutUsContent
+							p &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Databees is a startup company which is creating a web store, which allows individuals and companies to sell and buy items. After researching on current online markets, the company decided to create a sales model based on Amazon and Ebay. In order to manage the online business, the technical team of the company will design a database backend to support the functions required for the system. 
+				.title Founders
+				.row
+					.large-centered.columns
+						.founders
+							.founder
+								img(src="/static/images/founders/brandon.jpg")
+								p.cName Brandon
+							.founder
+								img(src="/static/images/founders/alex.jpg")
+								p.cName Alex
+							.founder
+								img(src="/static/images/founders/founder2.jpg")
+								p.cName Dan
+							.founder
+								img(src="/static/images/founders/janice.jpg")
+								p.cName Janice
+							.founder
+								img(src="/static/images/founders/yamin.jpg")
+								p.cName Yamin

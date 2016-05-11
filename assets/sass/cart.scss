@@ -1,0 +1,108 @@
+@import "base";
+@import "login";
+@import "header";
+
+body {
+	background-color: #f9f9f7;
+}
+
+.centered-block {
+   @include flexbox;
+	@include flex-direction(row);
+	@include justify-content(center);
+	@include align-items(center);
+}
+
+.cart {
+	margin-top: 5%; 
+	margin-bottom: 5%;
+
+	p{
+		text-align: left; 
+		font-size: 25px; 
+	}
+
+	.cart-item {
+		padding: 30px 20px 0 20px;
+		@include box-shadow(2px, 4px, 4px, -2px, rgba(0,0,0,0.75));
+		border: 1px solid #dce0e0;
+		background-color: #fff;
+		.item {
+			@include flexbox;
+			@include flex-direction(row);
+			@include justify-content(flex-start);
+			@include align-items(flex-start);
+			padding: 10px 0;
+			border-top: 1px solid #dce0e0;
+			border-bottom: 1px solid #dce0e0;
+			.item-image-container {
+				min-width: 300px;
+				.item-image {
+					display: block;
+					margin: 0 auto;
+				    height: auto;
+				    max-height: 225px;
+					border: 1px solid #dce0e0;
+				}
+			}
+			.item-info {
+				margin-left: 20px;
+				@include flexbox;
+				@include flex-direction(column);
+				@include justify-content(flex-start);
+				@include align-items(flex-start);
+				p {
+					margin: 0;
+				}
+				.price {
+					font-weight: bold;
+					font-size: 120%;
+				}
+				.type {
+					font-size: 90%;
+    				color: #615858;
+				}
+			}
+		}
+		.pages {
+			@include flexbox;
+			@include flex-direction(row);
+			@include justify-content(center);
+			@include align-items(center);
+			.button-group {
+				margin: 15px 0;
+				a {
+					margin: 0 5px;
+				}
+				a.current {
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}
+
+
+.checkout{
+	position: fixed;
+	margin: 5% 0 0 2%;
+	width: 250px; 
+	box-shadow: 10px 10px 5px #888888;
+	border: 1px solid #dce0e0;
+	padding-top: 10px;
+	@include flexbox;
+	@include flex-direction(column);
+	@include justify-content(center);
+	@include align-items(center);
+
+	p {
+		text-align: left; 
+		font-size: 20px; 
+	}
+	.inline-payments {
+		margin-bottom: 15px;
+		img.paypal {
+			margin-right: 3px;
+		}
+	}
+}

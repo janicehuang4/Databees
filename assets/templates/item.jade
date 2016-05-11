@@ -1,0 +1,83 @@
+{% load staticfiles %}
+html
+	head
+		meta(charset='utf-8')
+		title DataBeezzz
+		<link rel="icon" type="image/png" href="{% static "images/bee.png" %}">
+		<script type="text/javascript" src="{% static "js/item.bundle.js" %}"></script>
+		<link rel="stylesheet" href="{% static "css/item.css" %}"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	body
+		include _blocks/header
+		include _blocks/login
+		.search-bar-section
+			.row.full-width
+				.large-2.columns
+					a(href="javascript:history.go(-1)", style="font-size:95%;") Back to results
+				.small-10.large-10.columns
+					.row.collapse
+						.small-10.columns
+							form#search-form(method="GET")
+								input(type='text', name="q", value='{{query}}')
+						.small-2.columns
+							a.button.postfix(href="#")
+								i.fa.fa-search(aria-hidden="true")
+		.listing-section
+			.row.full-width.categories
+				.large-8.columns
+					p Categories: {{item.category}}
+			.row.full-width
+				.large-4.columns
+					.image-container
+						img(src="{{MEDIA_URL}}{{item.image}}")
+				.large-8.columns
+					.item-info-container
+						.title {{item.title}}
+						hr
+						{% if item.sale.auction %}
+						p.end-date Time left: {{item.sale.auction.end_date | date}} 12:00PM
+						{% endif %}
+						.row.margined
+							.large-6.columns.item-form
+								{% if item.sale.auction %}
+								p.current-bid Current bid: ${{item.sale.auction.current_bid}}
+								.increase-bid
+									.row.collapse
+										.small-5.columns
+											form#bidding-form(method="GET")
+												input(type="text", placeholder="Enter more than ${{item.sale.auction.current_bid}}")
+										.small-2.columns.float-left
+											a.hollow.button.postfix(href="#") Place bid
+								.reserved-price BuyItNow Price:
+									button.hollow.button.tiny(type='button') ${{item.sale.auction.reserved_price}}
+								{% else %}
+								.row.buyitnow
+									.large-6.columns Price:
+										p.sale_price ${{item.sale.buyitnow.sale_price}}
+									.large-6.columns
+										a.hollow.button.small(href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey={{payKey}}") BuyItNow&nbsp;&nbsp;&nbsp;
+										form.addCart(method="GET")
+											input.hidden(name="slug", value="{{item.sale.slug}}")
+											button.hollow.button.small.addCartButton(type='submit') Add to Cart
+								{% endif %}
+							.large-4.columns
+								.seller-info
+									p.title Seller information
+									hr
+									p.name Name: 
+										a {{item.sale.seller.first_name}} {{item.sale.seller.last_name}}
+									.stars Rating: 
+										i.fa.fa-star
+										i.fa.fa-star
+										i.fa.fa-star
+										i.fa.fa-star
+										i.fa.fa-star
+						.below-info.payment-info Payments:
+							img.paypal(src="http://ir.ebaystatic.com/pictures/aw/pics/logos/logoPayPal_51x14.png")
+							img(src="http://ir.ebaystatic.com/pictures/aw/pics/logos/CC_icons.png")
+						.below-info.return-info
+							p Return: accepted within 15 days after the purchase
+						.below-info.guarantee-info
+							p Guarantee:
+							<img class="guarantee-image" src="{% static "images/badlogo.png" %}"> MONEY BACK GUARANTEE
+							p.sub If your item arrived damaged or stolen, we will personally beat the sh*t out of the seller :)

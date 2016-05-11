@@ -1,0 +1,30 @@
+.reveal-modal#loginModal(data-reveal, aria-hidden="true", aria-labelledby="loginModal", role="dialog")
+	p.response
+	hr
+	#login
+		form.auth {% csrf_token %}
+			label.switch.switch-slide
+				input.switch-input(type="checkbox")
+				span.switch-label(data-on="Seller", data-off="Buyer", name="user-type")
+				span.switch-handle
+			label.email
+				span.fa.fa-envelope-o
+				input.inputData(type='email', name="email", value='Email', onblur="if(this.value == '') this.value = 'Email'", onfocus="if(this.value == 'Email') this.value = ''", required='')
+			label.password
+				span.fa.fa-lock
+				input.inputData(type='password', name="password", value='Password', onblur="if(this.value == '') this.value = 'Password'", onfocus="if(this.value == 'Password') this.value = ''", required='')
+			label.firstName
+				span.fa.fa-user
+				input.inputData(type='text', name="first_name", value='First Name', onblur="if(this.value == '') this.value = 'First Name'", onfocus="if(this.value == 'First Name') this.value = ''", required='')
+			label.lastName
+				span.fa.fa-user
+				input.inputData(type='text', name="last_name", value='Last Name', onblur="if(this.value == '') this.value = 'Last Name'", onfocus="if(this.value == 'Last Name') this.value = ''", required='')
+			label.sign
+				input(type='submit').submit-button
+			hr#line
+			p.signInBlock
+				| Already a member? 
+				a.sign.in Sign in now
+			p.signUpBlock
+				| Not a member? 
+				a.sign.up Sign up now

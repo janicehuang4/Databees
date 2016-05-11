@@ -1,0 +1,50 @@
+{% load staticfiles %}
+html
+	head
+		meta(charset='utf-8')
+		title DataBeezzz
+		<link rel="icon" type="image/png" href="{% static "images/bee.png" %}">
+		<script type="text/javascript" src="{% static "js/sell.bundle.js" %}"></script>
+		<link rel="stylesheet" href="{% static "css/sell.css" %}"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	body
+		include _blocks/header
+		include _blocks/login
+		.seller-section
+			.row.centered-block 
+				.large-6.columns.seller-forms
+					p List Your Items:
+					.text-box				
+						form(name="seller_form", method="POST", enctype="multipart/form-data") {% csrf_token %}
+							label(for="itemName") Item Name:
+							input(type="text", name="title", placeholder="Item Name")
+							label(for="sell_options") Sell Option (List as Buy It Now or Auction): 
+							input.buyItNow(type="radio", name="sell_type", value="buyItNow")
+							label.sell_option(for="buyItNow") Buy It Now: 
+							input.auction(type="radio",name="sell_type", value="auction")
+							label.sell_option(for="auctionSell") Auction: 
+							label.itemPrice(for="itemPrice") Item Price:
+								input.itemPrice(type="number", step="0.01" name="sale_price", placeholder=1.01)
+							label.reservePrice(for="reservePrice") Reserve Price:
+								input.reservePrice(type="number", step="0.01" name="reserved_price", placeholder=1.01) 
+							label.currentBid(for="currentBid") Current Bid:
+								input.currentBid(type="number", step="0.01" name="current_bid", placeholder=1.01)
+							label.bidEndDate(for="bidEndDate") Bid End Date:
+								input.bidEndDate(type="date", value="01-01-2016", name="end_date", placeholder="mm/dd/yy")
+							label(for="itemImage") Item Image:
+							input(type="file", name="image")
+
+
+							//- image input style file 
+							//- keywords input style text
+							label(for="itemDescription") Item Description: 
+							textarea(rows='4', cols='50', name="itemDescirption", form="seller_form", placeholder="Item Description")
+							label(for="keywords") Keywords:
+							input(type="text",name="keywords",placeholder="Toys")
+							//- label(for="category") Category:
+							//- select(name="category") 
+							//- 	option
+							//- 		option(value="toys") toys
+							//- 		option(value="computer") computer
+							//- 		option(value="camera") camera
+							button.submit(type='submit', value='submit') Submit

@@ -1,0 +1,22 @@
+.header
+	.leftHeader
+		a(href="/")
+			<img src="{% static "images/badlogo.png" %}">
+	ul.inline-list.mainMenu
+			{% if user.is_authenticated %}
+			li
+				a(href="/account/profile") Dashboard
+			{% else %}
+			li
+				a#loginCall(data-reveal-id="loginModal") Login
+			li
+				a#registerCall(data-reveal-id="loginModal") Sign up
+			{% endif %}
+			li
+				a#aboutus About Us
+			li
+				a(href="/cart") Cart
+			{% if user.is_authenticated %}
+			li
+				a(href="/sell/").success.button List item
+			{% endif %}

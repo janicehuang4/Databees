@@ -1,0 +1,40 @@
+@import "foundation";
+@import "font-awesome";
+@import "_flexbox";
+$use-fadeIn: true;
+@import "_animate";
+@import "_font";
+@import "_box-shadow";
+@import "_custon-mixins.scss"; //Please add you mixins into this file
+@include font-face(Gotham, "../fonts/gotham/gotham-light", null, null, otf);
+
+
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  @include font-smoothing(antialiased);
+}
+
+.full-width {
+   width: 95%;
+   margin-left: auto;
+   margin-right: auto;
+   max-width: initial;
+}
+
+.hidden {
+	display: none !important;
+}
+
+meta.foundation-data-attribute-namespace {
+  font-family: false; }
+
+
+.button.success {
+	background-color: #3BDC77;
+}
+

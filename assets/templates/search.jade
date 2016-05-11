@@ -1,0 +1,81 @@
+{% load staticfiles %}
+html
+	head
+		meta(charset='utf-8')
+		title DataBeezzz
+		<link rel="icon" type="image/png" href="{% static "images/bee.png" %}">
+		<script type="text/javascript" src="{% static "js/search.bundle.js" %}"></script>
+		<link rel="stylesheet" href="{% static "css/search.css" %}"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	body
+		include _blocks/header
+		include _blocks/login
+		.search-bar-section
+			.row.full-width
+				.small-2.large-2.columns
+					.result-statistics 
+						p Result in 1 msec
+						p {{low}}-{{high}} of {{size}} items
+				.small-8.large-8.columns
+					.row.collapse
+						.small-10.columns
+							form#search-form(method="GET")
+								input(type='text', name="q", value='{{query}}')
+						.small-2.columns
+							a.button.postfix(href="#")
+								i.fa.fa-search(aria-hidden="true")
+				.large-2.columns
+		.search-results-section
+			.row.full-width
+				.small-2.large-2.columns.search-settings
+					form#filter-form(form="GET")
+						.covered-categories.setting
+							p.title Categories
+							ul.categories-list
+								{% for category in categories %}
+								li 
+									a.category {{category}}
+								{% endfor %}
+								input.hidden#categoryInput(type="text", name="category")
+						.price-range.setting
+							p.title Price
+							.price-range-block
+								p $
+								input.price.from(type="text", value="{{fromPrice}}", name="from")
+								p to $
+								input.price.to(type="text", value="{{toPrice}}", name="to")
+						.type.setting
+							p.title Type
+								.buyItNow-option
+									input#BuyItNow(type="checkbox", name="BuyItNow")
+									label(for="BuyItNow") BuyIt Now
+								.auction-option
+									input#Auction(type="checkbox", name="Auction")
+									label(for="Auction") Auction
+						input#page.hidden(type="text", name="page")
+				.small-8.large-8.columns.search-results
+					{% for result in results %}
+					.item
+						.item-image-container
+							img.item-image(src="{{MEDIA_URL}}{{result.image}}")
+						.item-info
+							{% if result.sale.buyitnow %}
+							a.title.link(href="/item/{{result.sale.buyitnow.slug}}") {{result.title}}
+							p.price ${{result.sale.buyitnow.sale_price}}
+							p.type BuyItNow
+							{% else %}
+							a.title.link(href="/item/{{result.sale.auction.slug}}") {{result.title}}
+							p.price ${{result.sale.auction.current_bid}}
+							p.type Auction
+							{% endif %}							
+					{% endfor %}
+					.pages
+						.button-group
+							{% for i in pages %}
+							{% if forloop.counter == page %}
+							a.page.current {{forloop.counter}}
+							{% else %}
+							a.page {{forloop.counter}}
+							{% endif %}
+							{% endfor %}
+				.small-2.large-2.columns

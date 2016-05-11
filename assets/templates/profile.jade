@@ -1,0 +1,131 @@
+{% load staticfiles %}
+html
+    head
+    meta(charset='utf-8')
+    title Sensati.co
+    <script type="text/javascript" src="{% static "js/profile.bundle.js" %}"></script>
+    <link rel="icon" type="image/png" href="{% static "img/favicon.png" %}">
+    <link rel="stylesheet" href="{% static "css/profile.css" %}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    woenfwjnf
+    body
+      include _blocks/header
+      include _blocks/login
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='Content-Type', content='text/html')
+    title User Profile with Content Tabs - Design Shack Demo
+    meta(name='author', content='Jake Rocheleau')
+    link(rel='shortcut icon', href='http://designshack.net/favicon.ico')
+    link(rel='icon', href='http://designshack.net/favicon.ico')
+    link(rel='stylesheet', type='text/css', media='all', href='css/styles.css')
+    script(type='text/javascript', src='js/jquery-1.10.2.min.js')
+  body
+    #w
+      #content.clearfix
+        #userphoto
+          img(src='/static/images/founders/founder2.jpg', alt='default avatar')
+        h1 {{request.user.first_name}} {{request.user.last_name}}
+        nav#profiletabs
+          ul.clearfix
+            li
+              a.sel(href='#bio') Selling
+            li
+              a(href='#reviews') Reviews
+            li
+              a(href='#settings') Settings
+        section#bio
+          table
+            thead 
+              tr
+                th(width='400' style='text-align:center') Listing 
+                th(width='50') Title 
+                th(width='50') Auction Type 
+                th(width='50') Price Type 
+            tbody
+              {% for result in sale_set %}
+              {% if result.item.sale.buyitnow %}
+              tr 
+                  td 
+                       .item-image-container
+                         {% if result.item.image %}
+                         img.item-image(src="{{MEDIA_URL}}{{result.item.image}}")
+                         {% endif %}
+                  td(align='center', style='vertical-align:middle;') 
+                       a(href="/item/{{result.item.sale.buyitnow.slug}}") {{result.item.title}}
+ 
+                  td(align='center', style='vertical-align:middle;') Buy it now 
+                  td(align='center', style='vertical-align:middle;') ${{result.sale.buyitnow.sale_price}}
+              {% else %}
+              tr
+                  td 
+                       .item-image-container
+                         {% if result.item.image %}
+                         img.item-image(src="{{MEDIA_URL}}{{result.item.image}}")
+                         {% endif %}
+                  td(align='center', style='vertical-align:middle;') 
+                       a(href="/item/{{result.item.sale.auction.slug}}") {{result.item.title}}
+ 
+ 
+                  td(align='center', style='vertical-align:middle;') Auction 
+                  td(align='center', style='vertical-align:middle;') ${{result.sale.auction.current_bid}}
+ 
+              {% endif %}
+              {% endfor %}
+        section#reviews.hidden
+         h1.submitted Successfully Submitted <br> Thanks!
+         .reviews
+           .stars
+             form(action='')
+               h1 Review
+               input#star-5.star.star-5(type='radio', name='star')
+               label.star.star-5(for='star-5')
+               input#star-4.star.star-4(type='radio', name='star')
+               label.star.star-4(for='star-4')
+               input#star-3.star.star-3(type='radio', name='star')
+               label.star.star-3(for='star-3')
+               input#star-2.star.star-2(type='radio', name='star')
+               label.star.star-2(for='star-2')
+               input#star-1.star.star-1(type='radio', name='star')
+               label.star.star-1(for='star-1')
+           textarea(placeholder='Enter feedback here')
+           button.fakeSubmit(type='submit') Submit
+        section#settings.hidden
+          p
+            span
+              | User Settings:
+          p.setting
+            span
+              | E-mail Address 
+            |  {{request.user.username}}
+          p.setting
+            span
+              | Language 
+            |  English(US)
+          p.setting
+            span
+              | Phone Number 
+            |  {{request.user.telephone}}
+          p.setting
+            span
+              | Date joined 
+            |  {{request.user.last_login}}
+          p.setting
+            span
+              | Last Login 
+            |  {{request.user.last_login}}
+      // @end #content
+    // @end #w
+    script(type='text/javascript').
+      $(function(){
+      $('#profiletabs ul li a').on('click', function(e){
+      e.preventDefault();
+      var newcontent = $(this).attr('href');
+      $('#profiletabs ul li a').removeClass('sel');
+      $(this).addClass('sel');
+      $('#content section').each(function(){
+      if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
+      });
+      $(newcontent).removeClass('hidden');
+      });
+      });
