@@ -1,5 +1,5 @@
 #Databees Project 
-This is a webstore was done for my CMPSC 431W - Database Management Systems class for the spring 2016 semester. This project was done in a group of five(5).
+This webstore was done for my CMPSC 431W - Database Management Systems class for the spring 2016 semester. This project was done in a group of five(5).
 
 <b> ** This is a copy of a shared repository in the case the original should be deleted. </b>
 
